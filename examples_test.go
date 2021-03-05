@@ -12,11 +12,12 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"testing"
 
-	"github.com/jfcote87/esign"
-	"github.com/jfcote87/esign/v2.1/envelopes"
-	"github.com/jfcote87/esign/v2.1/folders"
-	"github.com/jfcote87/esign/v2.1/model"
+	"github.com/thaitanloi365/esign"
+	"github.com/thaitanloi365/esign/v2.1/envelopes"
+	"github.com/thaitanloi365/esign/v2.1/folders"
+	"github.com/thaitanloi365/esign/v2.1/model"
 )
 
 func ExampleOAuth2Config() {
@@ -57,18 +58,18 @@ func ExampleOAuth2Config() {
 func ExampleJWTConfig() {
 	ctx := context.TODO()
 	cfg := &esign.JWTConfig{
-		IntegratorKey: "51d1a791-489c-4622-b743-19e0bd6f359e",
-		KeyPairID:     "1f57a66f-cc71-45cd-895e-9aaf39d5ccc4",
+		IntegratorKey: "006eaef9-b306-455d-afee-6ee5ff783228",
+		KeyPairID:     "38016035-558a-460e-8470-90c88e27f1e4",
 		PrivateKey: `-----BEGIN RSA PRIVATE KEY-----
 		MIICWwIBAAKBgGeDMVfH1+RBI/JMPfrIJDmBWxJ/wGQRjPUm6Cu2aHXMqtOjK3+u
 		.........
 		ZS1NWRHL8r7hdJL8lQYZPfNqyYcW7C1RW3vWbCRGMA==
 		-----END RSFolderA PRIVATE KEY-----`,
-		AccountID: "c23357a7-4f00-47f5-8802-94d2b1fb9a29",
+		AccountID: "d601e74c-10a0-42bb-b5cc-3004bea3e1cf",
 		IsDemo:    true,
 	}
 
-	apiUserName := "78e5a047-f767-41f8-8dbd-10e3eed65c55"
+	apiUserName := "d5412853-667c-4257-a566-cd8e4c39ce57"
 	credential, err := cfg.Credential(apiUserName, nil, nil)
 	if err != nil {
 		log.Fatalf("create credential error: %v", err)
@@ -123,14 +124,12 @@ func ExampleJWTConfig_UserConsentURL() {
 
 func getCredential(ctx context.Context, apiUser string) (*esign.OAuth2Credential, error) {
 	cfg := &esign.JWTConfig{
-		IntegratorKey: "51d1a791-489c-4622-b743-19e0bd6f359e",
-		KeyPairID:     "1f57a66f-cc71-45cd-895e-9aaf39d5ccc4",
-		PrivateKey: `-----BEGIN RSA PRIVATE KEY-----
-		MIICWwIBAAKBgGeDMVfH1+RBI/JMPfrIJDmBWxJ/wGQRjPUm6Cu2aHXMqtOjK3+u
-		.........
-		ZS1NWRHL8r7hdJL8lQYZPfNqyYcW7C1RW3vWbCRGMA==
-		-----END RSA PRIVATE KEY-----`,
-		AccountID: "c23357a7-4f00-47f5-8802-94d2b1fb9a29",
+		IntegratorKey: "006eaef9-b306-455d-afee-6ee5ff783228",
+		KeyPairID:     "38016035-558a-460e-8470-90c88e27f1e4",
+		PrivateKey: `
+
+  `,
+		AccountID: "d601e74c-10a0-42bb-b5cc-3004bea3e1cf",
 		IsDemo:    true,
 	}
 
@@ -153,15 +152,15 @@ func ExampleTokenCredential() {
 	}
 }
 
-func Example_create_envelope() {
+func TestCreateEnvelop(t *testing.T) {
 	ctx := context.TODO()
-	apiUserID := "78e5a047-f767-41f8-8dbd-10e3eed65c55"
+	apiUserID := "d5412853-667c-4257-a566-cd8e4c39ce57"
 	cred, err := getCredential(ctx, apiUserID)
 	if err != nil {
 		log.Fatalf("credential error: %v", err)
 	}
 	sv := envelopes.New(cred)
-	f1, err := ioutil.ReadFile("letter.pdf")
+	f1, err := ioutil.ReadFile("Lorem_Ipsum.pdf")
 	if err != nil {
 		log.Fatalf("file read error: %v", err)
 	}
@@ -180,9 +179,9 @@ func Example_create_envelope() {
 		Recipients: &model.Recipients{
 			Signers: []model.Signer{
 				{
-					Email:             "user@example.com",
+					Email:             "thaitanloi365@gmail.com",
 					EmailNotification: nil,
-					Name:              "J F Cote",
+					Name:              "Loi",
 					RecipientID:       "1",
 					Tabs: &model.Tabs{
 						SignHereTabs: []model.SignHere{
